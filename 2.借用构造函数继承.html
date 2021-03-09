@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Parent(name, age) {
+        this.name = name
+        this.age = age
+    }
+
+    Parent.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function Child(gender, name, age) {
+        this.gender = gender
+        //用.call()和.apply()将父类构造函数引入子类函数
+        Parent.call(this, name, age)
+    }
+
+    var child = new Child('男','noom',22)
+    console.log(child);
+    child.getName()
+
+    /*
+    * 优点：1.解决了原型链继承的缺点（无法传参、共享父类属性）
+    *      2.可以继承多个构造函数属性（call多个）
+    * 缺点：1.只能继承父类私有属性，没有继承公有属性
+    *       2.无法实现构造函数复用（每次用都要重新调用）
+    * */
+</script>
+</body>
+</html>

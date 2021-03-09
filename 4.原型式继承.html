@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function createWithObj(obj) {
+        if (Object.create) {
+            return Object.create(obj)
+        } else {
+            function Fn() {
+
+            }
+
+            Fn.prototype = obj
+            return new Fn()
+        }
+    }
+
+    var obj = {
+        name:'noom'
+    }
+
+    var child = createWithObj(obj)
+    console.log(child);
+
+    /*
+    * 优点：对已有对象衍生新对象，不需要创建自定义类型
+    * 缺点：与原型链继承一样，多个实例共享被继承对象的属性，存在篡改的可能，也无法传参
+    * */
+</script>
+</body>
+</html>

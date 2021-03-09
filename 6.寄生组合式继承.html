@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 原型链继承：父类私有和共有都变成子类共有的
+    * call:实现了父类私有变成子类私有
+    * 还需要实现父类共有的变成子类共有的->寄生组合继承
+    * */
+
+    function Parent(name, age) {
+        this.name = name
+        this.age = age
+    }
+
+    Parent.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function Child(name, age, gender) {
+        Parent.apply(this, [name, age])
+        this.gender = gender
+    }
+
+    //Object.create(obj):创建一个空对象，让空对象.__proto__指向obj
+    Child.prototype = Object.create(Parent.prototype)
+    Child.prototype.constructor = Child
+
+    Child.prototype.sayHi = function () {
+        console.log('你好');
+    }
+
+    var child = new Child('noom', 12, '男')
+
+    console.log(child);
+    child.getName()
+
+    /*
+    * 寄生组合继承：call继承+类似于原型继承
+    * 优点：父类私有和共有分别是子类实例的私有和公有属性方法
+    * 缺点：给子类原型添加属性和方法的时候，一定要在子类的原型改变之后
+    * */
+</script>
+</body>
+</html>

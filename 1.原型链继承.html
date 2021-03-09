@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Parent() {
+        this.name = 'noom'
+        this.age = 12
+    }
+
+    Parent.prototype.getAge = function () {
+        console.log(this.age);
+    }
+
+    function Child(gender) {
+        this.gender = gender
+    }
+
+    //让新实例的原型等于父类的实例
+    Child.prototype = new Parent()
+    var child = new Child('nv')
+    console.log(child);
+    child.getAge()
+
+    /*
+    * 优点：实例继承了父类的私有和公有属性
+    * 缺点：1.新实例无法向父类构造函数传参
+    *       2.所有新实例共享父类实例的属性，一个实例修改了原型属性，另一个实例的原型属性也会被修改
+    * */
+</script>
+</body>
+</html>

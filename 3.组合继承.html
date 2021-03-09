@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Parent(name, age) {
+        this.name = name
+        this.age = age
+    }
+
+    Parent.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function Child(name, age, gender) {
+        Parent.apply(this, [name, age])
+        this.gender = gender
+    }
+
+    //结合两种模式的优点，传参和复用
+    Child.prototype = new Parent()
+
+    var child1 = new Child('noom', 22, '男')
+    var child2 = new Child('kk', 25, '女')
+    console.log(child1);
+    child2.age += 1
+    console.log(child1);
+    console.log(child2);
+
+    /*
+    * 优点：1.可以继承父类的公有和私有属性，可以传参
+    *       2.每个实例引用的构造函数是私有的
+    * 缺点：调用了两次父类构造函数
+    * */
+</script>
+</body>
+</html>

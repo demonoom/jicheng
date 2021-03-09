@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function createAnother(obj) {
+        var clone = Object.create(obj)
+        //以某种方式来增强这个对象
+        clone.skill = function () {
+            console.log('run');
+        }
+        return clone
+    }
+
+    var animal = {
+        eat:'food',
+        drink:'water'
+    }
+
+    var dog = createAnother(animal)
+    console.log(dog);
+</script>
+</body>
+</html>

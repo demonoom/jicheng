@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //es6中基于class创造出来的类不能当做普通函数执行
+    class A {
+        constructor(x) {
+            this.x = x
+        }
+
+        getX() {
+            console.log(this.x);
+        }
+    }
+
+    A.prototype.num = 100
+
+    /**
+     * ES6中的继承
+     * class CHILD extends PARENT{}  =>  B.prototype.__proto__ = A.prototype
+     */
+    class B extends A {
+        constructor(y) {
+            //子类只要继承父类，可以不写constructor,一旦写了，则在constructor中的第一句话必须是super()
+            //不写constructor，浏览器会默认创建 constructor(...args){super(...args)}
+            super(100)//=>A.call(this,100) 把父类当做普通方法执行，给方法传递参数，让方法中的this是子类的实例
+            this.y = y
+        }
+
+        getY() {
+            console.log(this.y);
+        }
+    }
+
+    let b1 = new B(200)
+    console.log(b1);
+
+</script>
+<script>
+    /*class Login extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+
+        componentWillMount() {
+            //=> React.Component.prototype.setState=...
+            this.setState()
+        }
+        render(){
+
+        }
+    }*/
+
+    class Utils {
+        query() {
+
+        }
+    }
+
+    class Dialog extends Utils {
+        constructor() {
+            super();
+            // new Utils().query()
+            this.query()
+        }
+    }
+</script>
+</body>
+</html>
